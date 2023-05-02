@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Anti_Cafe;
+namespace Anti_Cafe.DAL.Models;
 
 public partial class Reservation
 {

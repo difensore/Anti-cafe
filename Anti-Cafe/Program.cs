@@ -10,13 +10,14 @@ namespace Anti_Cafe
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            var connectionString = Environment.GetEnvironmentVariable("sqlAnticafe");
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AnticafeContext>(options =>
     options.UseSqlServer(connectionString));
-            builder.Services.AddIdentity<User, IdentityRole>(opts => {
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+            {
                 opts.Password.RequiredLength = 6;
-            })
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

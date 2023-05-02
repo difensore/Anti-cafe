@@ -1,8 +1,9 @@
 ﻿using System;
-using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace Anti_Cafe.DAL.Models;
 
@@ -17,6 +18,7 @@ public partial class AnticafeContext : IdentityDbContext<IdentityUser, IdentityR
     {
     }
 
+
     public virtual DbSet<Receipt> Receipts { get; set; }
 
     public virtual DbSet<Reservation> Reservations { get; set; }
@@ -25,10 +27,18 @@ public partial class AnticafeContext : IdentityDbContext<IdentityUser, IdentityR
 
     public virtual DbSet<Table> Tables { get; set; }
 
-   
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=DESKTOP-S7DSP8F\\SQLEXPRESS;Database=Anticafe;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+        }
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Receipt>(entity =>
         {
             entity
