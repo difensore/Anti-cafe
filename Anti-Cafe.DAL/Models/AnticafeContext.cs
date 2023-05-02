@@ -32,7 +32,7 @@ public partial class AnticafeContext : IdentityDbContext<IdentityUser, IdentityR
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseSqlServer("Server=DESKTOP-S7DSP8F\\SQLEXPRESS;Database=Anticafe;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
+           
         }
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
