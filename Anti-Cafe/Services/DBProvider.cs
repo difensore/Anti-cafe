@@ -17,18 +17,19 @@ namespace Anti_Cafe.Services
            var stattuets= await _db.Statuettes.ToListAsync();
             return stattuets;
         }
-        public async Task<string> CReateStatuette(string name)
-        {
-            var statuette = new Statuette() { Id= Guid.NewGuid().ToString(), Name=name };
+        public async Task<List<Statuette>> CReateStatuette(string name)
+        {           
             try
             {
-                var st = _db.Statuettes.FirstAsync(x => x.Name == name);
-                return "Вже є така фігурка, змініть назву та повторіть знову";
+                var st = _db.Statuettes.Single(x => x.Name == name);
+                return null;
             }
             catch
             {
+                var statuette = new Statuette() { Id = Guid.NewGuid().ToString(), Name = name, InUse = 0 };
                 await _db.Statuettes.AddAsync(statuette);
-                return null;
+                _db.SaveChanges();
+                return await _db.Statuettes.ToListAsync();
             }
            
         }

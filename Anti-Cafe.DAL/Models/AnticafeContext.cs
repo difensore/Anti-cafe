@@ -28,13 +28,7 @@ public partial class AnticafeContext : IdentityDbContext<IdentityUser, IdentityR
     public virtual DbSet<Table> Tables { get; set; }
 
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-           
-        }
-    }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

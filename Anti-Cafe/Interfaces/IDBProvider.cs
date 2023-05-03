@@ -5,6 +5,6 @@ namespace Anti_Cafe.Interfaces
     public interface IDBProvider
     {
         public Task<List<Statuette>> GetStattue();
-        public Task<string> CReateStatuette(string name);
+        public Task<List<Statuette>> CReateStatuette(string name);
     }
 }

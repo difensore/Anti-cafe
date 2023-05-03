@@ -9,11 +9,11 @@ public partial class Statuette
 
     public string Name { get; set; } = null!;
 
-    public int Persons { get; set; }
+    public int? Persons { get; set; }
 
-    public DateTime TimeIn { get; set; }
+    public DateTime? TimeIn { get; set; }
 
-    public DateTime TimeOut { get; set; }
+    public DateTime? TimeOut { get; set; }
 
     public int InUse { get; set; }
 

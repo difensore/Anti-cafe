@@ -1,4 +1,5 @@
-﻿using Anti_Cafe.Models;
+﻿using Anti_Cafe.Interfaces;
+using Anti_Cafe.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,18 +7,23 @@ namespace Anti_Cafe.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IDBProvider _provider;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IDBProvider provider)
         {
-            _logger = logger;
+           _provider = provider;
         }
 
-        public IActionResult Index()
-        {
-            return View();
+        public async Task<IActionResult> Index()
+        {            
+            return View(await _provider.GetStattue());
         }
-
+        [HttpPost]
+        public async Task<IActionResult> CreateStatuette(string name)
+        {
+             
+            return PartialView("_CreateStatuette",await _provider.CReateStatuette(name));
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -15,7 +15,7 @@ namespace Anti_Cafe
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AnticafeContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString),ServiceLifetime.Transient);
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
             {
                 opts.Password.RequiredLength = 6;
