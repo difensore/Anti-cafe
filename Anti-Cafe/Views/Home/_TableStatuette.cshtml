@@ -10,6 +10,8 @@
                 <th scope="col">Час заходу</th>
                 <th scope="col">Час виходу</th>
                 <th scope="col">Статус</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -18,14 +20,14 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>@s.Name</td>
-                    @if (s.Persons == null)
-                    {
-                        <td>-</td>
-                    }
-                    else
-                    {
-                        <td>@s.Persons</td>
-                    }
+                @if (s.Persons == null)
+                {
+                    <td><input value="0" /></td>
+                }
+                else
+                {
+                    <td>@s.Persons</td>
+                }
                     @if (s.TimeIn != null)
                     {
                         <td>@s.TimeIn</td>
@@ -52,6 +54,8 @@
                     {
                         <td>Вільний</td>
                     }
+                <td><a data-ajax-mode="replace" data-ajax-update="#stlist" data-ajax="true" asp-route-name="@s.Name" asp-action="DeleteStatuette" class="btn btn-primary">Видалити</a></td>
+                <td><a class="btn btn-primary">Змінити</a></td>
                 </tr>
             }
         </tbody>

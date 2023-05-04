@@ -16,13 +16,19 @@ namespace Anti_Cafe.Controllers
 
         public async Task<IActionResult> Index()
         {            
-            return View(await _provider.GetStattue());
+            return View(await _provider.GetStatuette());
         }
         [HttpPost]
         public async Task<IActionResult> CreateStatuette(string name)
         {
              
-            return PartialView("_CreateStatuette",await _provider.CReateStatuette(name));
+            return PartialView("_TableStatuette", await _provider.CReateStatuette(name));
+        }
+        
+        public async Task<IActionResult> DeleteStatuette(string name)
+        {
+
+            return PartialView("_TableStatuette", await _provider.DeleteStatuette(name));
         }
         public IActionResult Privacy()
         {

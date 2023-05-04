@@ -12,16 +12,30 @@ namespace Anti_Cafe.Services
         {
             _db = context;
         }
-        public async Task<List<Statuette>> GetStattue()
+        public async Task<List<Statuette>> GetStatuette()
         {
            var stattuets= await _db.Statuettes.ToListAsync();
             return stattuets;
+        }
+        public async Task<List<Statuette>> DeleteStatuette(string name)
+        {
+            try
+            {
+                var st =  _db.Statuettes.Single(x => x.Name == name);
+                 _db.Statuettes.Remove(st);
+                _db.SaveChanges();
+                return await GetStatuette();
+            }
+            catch 
+            {
+                return null;
+            }
         }
         public async Task<List<Statuette>> CReateStatuette(string name)
         {           
             try
             {
-                var st = _db.Statuettes.Single(x => x.Name == name);
+                var st =await _db.Statuettes.SingleAsync(x => x.Name == name);
                 return null;
             }
             catch
@@ -29,7 +43,7 @@ namespace Anti_Cafe.Services
                 var statuette = new Statuette() { Id = Guid.NewGuid().ToString(), Name = name, InUse = 0 };
                 await _db.Statuettes.AddAsync(statuette);
                 _db.SaveChanges();
-                return await _db.Statuettes.ToListAsync();
+                return await GetStatuette();
             }
            
         }
